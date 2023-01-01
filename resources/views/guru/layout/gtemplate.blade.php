@@ -29,6 +29,11 @@
   <!-- Template Main CSS File -->
   <link href="{{asset('templating/assets/')}}/css/style.css" rel="stylesheet">
 
+  <!-- Toast Files -->
+  <link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
+  <!-- Datatable Files -->
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
+
   <!-- =======================================================
   * Template Name: NiceAdmin - v2.4.1
   * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
@@ -44,7 +49,7 @@
 
     <div class="d-flex align-items-center justify-content-between">
       <a href="index.html" class="logo d-flex align-items-center">
-        <img src="{{asset('templating/assets/')}}/img/logo.png" alt=""> 
+        <img src="{{asset('templating/assets/')}}/img/logo.png" alt="">
         <span class="d-none d-lg-block">SDN CENGAL I</span>
       </a>
       <i class="bi bi-list toggle-sidebar-btn"></i>
@@ -60,54 +65,17 @@
           </a>
         </li><!-- End Search Icon-->
 
-        <li class="nav-item dropdown">
-
-          <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
-            <i class="bi bi-bell"></i>
-            <span class="badge bg-primary badge-number">1</span>
-          </a><!-- End Notification Icon -->
-
-          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
-            <li class="dropdown-header">
-              You have 4 new notifications
-              <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li class="notification-item">
-              <i class="bi bi-exclamation-circle text-warning"></i>
-              <div>
-                <h4>Lorem Ipsum</h4>
-                <p>Quae dolorem earum veritatis oditseno</p>
-                <p>30 min. ago</p>
-              </div>
-            </li>
-
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-            <li class="dropdown-footer">
-              <a href="#">Show all notifications</a>
-            </li>
-
-          </ul><!-- End Notification Dropdown Items -->
-
-        </li><!-- End Notification Nav -->
-
-
         <li class="nav-item dropdown pe-3">
 
           <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
             <img src="{{asset('templating/assets/')}}/img/profile-img.jpg" alt="Profile" class="rounded-circle">
-            <span class="d-none d-md-block dropdown-toggle ps-2">K. Anderson</span>
+            <span class="d-none d-md-block dropdown-toggle ps-2">{{ Auth::user()->name }}</span>
           </a><!-- End Profile Iamge Icon -->
 
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
             <li class="dropdown-header">
-              <h6>Kevin Anderson</h6>
-              <span>Web Designer</span>
+              <h6>{{ Auth::user()->name }}</h6>
+              <span>Wali Kelas</span>
             </li>
             <li>
               <hr class="dropdown-divider">
@@ -124,12 +92,11 @@
             </li>
 
             <li>
-              <a class="dropdown-item d-flex align-items-center" href="{{ route('logout') }}"
-              onclick="event.preventDefault();
+              <a class="dropdown-item d-flex align-items-center" href="{{ route('logout') }}" onclick="event.preventDefault();
               document.getElementById('logout-form').submit();">
-              <i class="bi bi-box-arrow-right"></i>{{ __('Logout') }}
+                <i class="bi bi-box-arrow-right"></i>{{ __('Logout') }}
               </a>
-                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">@csrf</form>              
+              <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">@csrf</form>
             </li>
 
           </ul><!-- End Profile Dropdown Items -->
@@ -146,33 +113,27 @@
     <ul class="sidebar-nav" id="sidebar-nav">
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="index.html">
+        <a class="nav-link collapsed" href="{{ url('home') }}">
           <i class="bi bi-grid"></i>
           <span>Dashboard</span>
         </a>
       </li><!-- End Dashboard Nav -->
       <li class="nav-item">
-        <a class="nav-link collapsed" href="index.html">
-          <i class="bi bi-grid"></i>
+        <a class="nav-link collapsed" href="{{ url('gsiswa') }}">
+          <i class="bi bi-people"></i>
           <span>Data Siswa</span>
         </a>
       </li><!-- End Dashboard Nav -->
       <li class="nav-item">
-        <a class="nav-link collapsed" href="index.html">
-          <i class="bi bi-grid"></i>
-          <span>Data Guru</span>
+        <a class="nav-link collapsed" href="{{ url('gnilai') }}">
+          <i class="bi bi-file-diff"></i>
+          <span>Rekap Nilai</span>
         </a>
       </li><!-- End Dashboard Nav -->
       <li class="nav-item">
-        <a class="nav-link collapsed" href="index.html">
-          <i class="bi bi-grid"></i>
-          <span>Data Nilai</span>
-        </a>
-      </li><!-- End Dashboard Nav -->
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="index.html">
-          <i class="bi bi-grid"></i>
-          <span>Data Taraf Seraf</span>
+        <a class="nav-link collapsed" href="{{ url('gtarap') }}">
+          <i class="bi bi-file-text"></i>
+          <span>Taraf Serap</span>
         </a>
       </li><!-- End Dashboard Nav -->
 
@@ -180,9 +141,9 @@
 
   </aside><!-- End Sidebar-->
 
-<!-- Main Content -->
-@yield('content')
-<!-- Main Content -->
+  <!-- Main Content -->
+  @yield('content')
+  <!-- Main Content -->
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
@@ -198,6 +159,37 @@
 
   <!-- Template Main JS File -->
   <script src="{{asset('templating/assets/')}}/js/main.js"></script>
+  <script src="http://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+  <script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
+
+  <script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
+  {!! Toastr::message() !!}
+
+  <script>
+  //message with toastr
+  @if(session()->has('success'))
+
+     toastr.success('{{ session('success') }}', 'BERHASIL!');
+
+  @elseif(session()->has('error'))
+
+     toastr.error('{{ session('error') }}', 'GAGAL!');
+
+  @endif
+</script>
+
+
+  <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
+
+  <script>
+    $(document).ready(function() {
+      $('#table_id').DataTable({
+        responsive: {
+          details: true
+        }
+      });
+    });
+  </script>
 
 </body>
 
