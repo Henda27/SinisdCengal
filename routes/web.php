@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Auth;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth/login');
 });
 
 Auth::routes();
@@ -36,11 +36,15 @@ Route::resource('mapel', \App\Http\Controllers\MapelController::class)
 Route::resource('siswa', \App\Http\Controllers\SiswaController::class)
     ->middleware('auth');
 
+Route::resource('/nilai', App\Http\Controllers\NilaiController::class);
+
 Route::resource('gsiswa', \App\Http\Controllers\GSiswaController::class)
     ->middleware('auth');
 
-Route::resource('gnilai', \App\Http\Controllers\GNilaiController::class)
+Route::resource('report', \App\Http\Controllers\ReportController::class)
     ->middleware('auth');
 
-Route::resource('gtarap', \App\Http\Controllers\GTarafController::class)
-    ->middleware('auth');
+// Route::resource('nilai_uas', \App\Http\Controllers\UasController::class)
+//     ->middleware('auth');
+Route::get('nilai_uas', [App\Http\Controllers\UasController::class, 'index']);
+Route::post('/guru/uasUpdate', [App\Http\Controllers\UasController::class, 'nilaiUas']);

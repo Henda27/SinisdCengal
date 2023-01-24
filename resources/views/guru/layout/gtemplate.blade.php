@@ -32,7 +32,9 @@
   <!-- Toast Files -->
   <link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
   <!-- Datatable Files -->
-  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/dataTables.bootstrap4.min.css">
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/2.3.2/css/buttons.dataTables.min.css">
 
   <!-- =======================================================
   * Template Name: NiceAdmin - v2.4.1
@@ -49,8 +51,8 @@
 
     <div class="d-flex align-items-center justify-content-between">
       <a href="index.html" class="logo d-flex align-items-center">
-        <img src="{{asset('templating/assets/')}}/img/logo.png" alt="">
-        <span class="d-none d-lg-block">SDN CENGAL I</span>
+        <img src="{{asset('templating/assets/')}}/img/logo2.png" alt="">
+        <span class="d-none d-lg-block" style="font-family: Arial, Helvetica, sans-serif;">SDN CENGAL I</span>
       </a>
       <i class="bi bi-list toggle-sidebar-btn"></i>
     </div><!-- End Logo -->
@@ -68,7 +70,6 @@
         <li class="nav-item dropdown pe-3">
 
           <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-            <img src="{{asset('templating/assets/')}}/img/profile-img.jpg" alt="Profile" class="rounded-circle">
             <span class="d-none d-md-block dropdown-toggle ps-2">{{ Auth::user()->name }}</span>
           </a><!-- End Profile Iamge Icon -->
 
@@ -81,12 +82,6 @@
               <hr class="dropdown-divider">
             </li>
 
-            <li>
-              <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
-                <i class="bi bi-person"></i>
-                <span>My Profile</span>
-              </a>
-            </li>
             <li>
               <hr class="dropdown-divider">
             </li>
@@ -125,15 +120,15 @@
         </a>
       </li><!-- End Dashboard Nav -->
       <li class="nav-item">
-        <a class="nav-link collapsed" href="{{ url('gnilai') }}">
+        <a class="nav-link collapsed" href="{{ url('nilai_uas') }}">
           <i class="bi bi-file-diff"></i>
           <span>Rekap Nilai</span>
         </a>
       </li><!-- End Dashboard Nav -->
       <li class="nav-item">
-        <a class="nav-link collapsed" href="{{ url('gtarap') }}">
+        <a class="nav-link collapsed" href="{{ url('report') }}">
           <i class="bi bi-file-text"></i>
-          <span>Taraf Serap</span>
+          <span>Report Nilai</span>
         </a>
       </li><!-- End Dashboard Nav -->
 
@@ -160,26 +155,20 @@
   <!-- Template Main JS File -->
   <script src="{{asset('templating/assets/')}}/js/main.js"></script>
   <script src="http://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
-  <script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
 
   <script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
-  {!! Toastr::message() !!}
-
-  <script>
-  //message with toastr
-  @if(session()->has('success'))
-
-     toastr.success('{{ session('success') }}', 'BERHASIL!');
-
-  @elseif(session()->has('error'))
-
-     toastr.error('{{ session('error') }}', 'GAGAL!');
-
-  @endif
 </script>
 
 
-  <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
+  <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+  <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+  <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.1/js/dataTables.bootstrap4.min.js"></script>
+  <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/buttons/2.3.2/js/dataTables.buttons.min.js"></script>
+  <script type="text/javascript" charset="utf8" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+  <script type="text/javascript" charset="utf8" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+  <script type="text/javascript" charset="utf8" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+  <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/buttons/2.3.2/js/buttons.html5.min.js"></script>
+  <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/buttons/2.3.2/js/buttons.print.min.js"></script>
 
   <script>
     $(document).ready(function() {
@@ -189,7 +178,16 @@
         }
       });
     });
+    $(document).ready(function() {
+    $('#report').DataTable( {
+        dom: 'Bfrtip',
+        buttons: [
+            'copy', 'csv', 'excel', 'pdf', 'print'
+        ]
+    } );
+} );
   </script>
+
 
 </body>
 

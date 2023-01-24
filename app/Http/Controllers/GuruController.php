@@ -90,15 +90,14 @@ class GuruController extends Controller
      */
     public function edit($id_guru)
     {
+        $users = User::where('is_admin', 0)->get();
         $guru = Guru::find($id_guru);
         if (!$guru) {
             return redirect()->route('guru.index')
                 ->with(['error' => 'Data Guru dengan id' . $id_guru . ' tidak ditemukan']);
         }
 
-        return view('admin.guru.edit', [
-            'guru' => $guru,
-        ]);
+        return view('admin.guru.edit')->with('users', $users)->with('guru', $guru);
     }
 
     /**
@@ -110,7 +109,32 @@ class GuruController extends Controller
      */
     public function update(Request $request, $id_guru)
     {
-        //
+        $request->validate([
+            'nip' => 'required',
+            'nama_guru' => 'required',
+            'kelas' => 'required',
+            'email' => 'required',
+            'password' => 'sometimes|nullable|confirmed',
+        ]);
+
+        $upduser = User::where('is_admin', 0)->get();
+        $guru = Guru::find($id_guru);
+        $guru->nip = $request->nip;
+        $guru->nama_guru = $request->nama_guru;
+        $guru->kelas = $request->kelas;
+        $guru->email = $request->email;
+        if ($request->password) {
+            $guru->password = bcrypt($request->password);
+        }
+
+        $upduser->name = $request->get('nama_guru');
+        $ddsave = $upduser&&$guru->save();
+
+        if ($ddsave) {
+            return redirect()->route('guru.index')
+                ->with(['success' => 'Data Berhasil Disimpan!']);
+        }
+
     }
 
     /**
@@ -122,10 +146,7 @@ class GuruController extends Controller
     public function destroy($id_guru)
     {
         $guru = Guru::find($id_guru);
-        
-        if ($guru) {
-            $guru->delete();
-        }
+        $guru->delete();
 
         return redirect()->route('guru.index')
             ->with(['success' => 'Data Berhasil Dihapus!']);

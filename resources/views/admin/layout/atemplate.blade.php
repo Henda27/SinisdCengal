@@ -25,14 +25,13 @@
   <link href="{{asset('templating/assets/')}}/vendor/quill/quill.bubble.css" rel="stylesheet">
   <link href="{{asset('templating/assets/')}}/vendor/remixicon/remixicon.css" rel="stylesheet">
   <link href="{{asset('templating/assets/')}}/vendor/simple-datatables/style.css" rel="stylesheet">
-
-  <!-- Template Main CSS File -->
-  <link href="{{asset('templating/assets/')}}/css/style.css" rel="stylesheet">
-
   <!-- Toast Files -->
   <link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
+  <!-- Template Main CSS File -->
+  <link href="{{asset('templating/assets/')}}/css/style.css" rel="stylesheet">
   <!-- Datatable Files -->
-  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/dataTables.bootstrap4.min.css">
 
   <!-- =======================================================
   * Template Name: NiceAdmin - v2.4.1
@@ -43,14 +42,13 @@
 </head>
 
 <body>
-
   <!-- ======= Header ======= -->
   <header id="header" class="header fixed-top d-flex align-items-center">
 
     <div class="d-flex align-items-center justify-content-between">
-      <a href="index.html" class="logo d-flex align-items-center">
-        <img src="{{asset('templating/assets/')}}/img/logo.png" alt="">
-        <span class="d-none d-lg-block">SDN CENGAL I</span>
+      <a href="#" class="logo d-flex align-items-center">
+        <img src="{{asset('templating/assets/')}}/img/logo2.png" alt="">
+        <span class="d-none d-lg-block" style="font-family: Arial, Helvetica, sans-serif;">SDN CENGAL I</span>
       </a>
       <i class="bi bi-list toggle-sidebar-btn"></i>
     </div><!-- End Logo -->
@@ -68,25 +66,18 @@
         <li class="nav-item dropdown pe-3">
 
           <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-            <img src="{{asset('templating/assets/')}}/img/profile-img.jpg" alt="Profile" class="rounded-circle">
             <span class="d-none d-md-block dropdown-toggle ps-2">{{ Auth::user()->name }}</span>
           </a><!-- End Profile Iamge Icon -->
 
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
             <li class="dropdown-header">
               <h6>{{ Auth::user()->name }}</h6>
-              <span>Web Designer</span>
+              <span>Operator</span>
             </li>
             <li>
               <hr class="dropdown-divider">
             </li>
 
-            <li>
-              <a class="dropdown-item d-flex align-items-center" href="#">
-                <i class="bi bi-person"></i>
-                <span>My Profile</span>
-              </a>
-            </li>
             <li>
               <hr class="dropdown-divider">
             </li>
@@ -138,8 +129,14 @@
       </li><!-- End Dashboard Nav -->
       <li class="nav-item">
         <a class="nav-link collapsed" href="{{ url('siswa') }}">
-          <i class="bi bi-file-text"></i>
+          <i class="bi bi-journal-text"></i>
           <span>Data Siswa</span>
+        </a>
+      </li><!-- End Dashboard Nav -->
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="{{ url('nilai') }}">
+          <i class="bi bi-journal-check"></i>
+          <span>Data Nilai</span>
         </a>
       </li><!-- End Dashboard Nav -->
 
@@ -165,39 +162,17 @@
 
   <!-- Template Main JS File -->
   <script src="{{asset('templating/assets/')}}/js/main.js"></script>
-
-  <script src="http://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
-  <script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
-
-  <script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
-  {!! Toastr::message() !!}
-
-  <script>
-  //message with toastr
-  @if(session()->has('success'))
-
-     toastr.success('{{ session('success') }}', 'BERHASIL!');
-
-  @elseif(session()->has('error'))
-
-     toastr.error('{{ session('error') }}', 'GAGAL!');
-
-  @endif
-</script>
-
-
-  <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
-
+  <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+  <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+  <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.1/js/dataTables.bootstrap4.min.js"></script>
   <script>
     $(document).ready(function() {
       $('#table_id').DataTable({
-        responsive: {
-          details: true
-        }
+        select: true
       });
     });
   </script>
-
+  <script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
 
 </body>
 

@@ -17,8 +17,6 @@
 
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title">Data Pengguna</h5>
-              <hr>
               <a href="{{route('users.create')}}" class="btn btn-primary"><i class="bi bi-plus-circle-dotted"></i> Tambah Data</a>
               <div>&nbsp;</div>
               <table class="table table-hover table-bordered table-stripped display" id="table_id">
@@ -28,7 +26,7 @@
                         <th>Nama</th>
                         <th>Email</th>
                         <th>Foto</th>
-                        <th>Opsi</th>
+                        <th style="text-align: center;">Opsi</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -39,9 +37,9 @@
                         <td>{{$user->email}}</td>
                         <td></td>
                         <td style="text-align: center;">
-                            <a href="{{route('users.edit', $user)}}" class="bi bi-pencil"></a>
+                            <a href="{{route('users.edit', $user)}}" class="btn btn-warning"><i class="bi bi-pencil"></i></a>
                             |
-                            <a href="{{route('users.destroy', $user)}}" onclick="notificationBeforeDelete(event, this)" class="bi bi-trash"></a>
+                            <a href="{{route('users.destroy', $user)}}" onclick="notificationBeforeDelete(event, this)" class="btn btn-danger"><i class="bi bi-trash"></i></a>
                         </td>
                     </tr>
                     @endforeach

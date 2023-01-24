@@ -15,10 +15,20 @@ class SiswaController extends Controller
     public function index()
     {
         $siswa = Siswa::all();
+        $guru = Guru::get_all();
+        return view('admin.siswa.index')->with('siswa',$siswa)->with('guru', $guru);
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function filter()
+    {
+        //
         
-        return view('admin.siswa.index',[
-            'siswa' => $siswa
-        ]);
     }
 
     /**
@@ -56,17 +66,6 @@ class SiswaController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
@@ -74,15 +73,14 @@ class SiswaController extends Controller
      */
     public function edit($id_siswa)
     {
+        $guru = Guru::all();
         $siswa = Siswa::find($id_siswa);
         if (!$siswa) {
             return redirect()->route('siswa.index')
                 ->with(['error' => 'Data siswa dengan id' . $id_siswa . ' tidak ditemukan']);
         }
 
-        return view('admin.siswa.edit', [
-            'siswa' => $siswa,
-        ]);
+        return view('admin.siswa.edit')->with('siswa',$siswa)->with('guru',$guru);
     }
 
     /**

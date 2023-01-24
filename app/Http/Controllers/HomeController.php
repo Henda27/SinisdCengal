@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Guru;
+use App\Models\Mapel;
+use App\Models\Siswa;
 
 class HomeController extends Controller
 {
@@ -33,6 +36,13 @@ class HomeController extends Controller
      */
     public function adminHome()
     {
-        return view('admin.adminHome');
+        $jguru = Guru::all()->count();
+        $jmapel = Mapel::all()->count();
+        $jsiswa = Siswa::all()->count();
+
+        return view('admin.adminHome')
+        ->with('jguru', $jguru)
+        ->with('jmapel', $jmapel)
+        ->with('jsiswa', $jsiswa);
     }
 }

@@ -37,11 +37,13 @@
                                 <input type="email" class="form-control" id="inputEmail4" name="email" value="{{$user->email ?? old('email')}}">
                             </div>
                             <div class="col-12">
-                                <label for="inputEmail4" class="form-label">Role</label>
+                            <label for="inputEmail4" class="form-label">Role</label>
                                 <select name="is_admin" id="" class="form-control">
                                     <option>----- Pilih Role -----</option>
-                                    <option if="" ($is_admin="=" 1="" )="" echo="" 'selected'="" ;="" ?="">1</option>
-                                    <option if="" ($is_admin="=" 0="" )="" echo="" 'selected'="" ;="" ?="">0</option>
+                                    <!-- <option if="" ($is_admin="=" 1="" )="" echo="" 'selected'="" ;="" ?="">Admin</option>
+                                    <option if="" ($is_admin="=" 0="" )="" echo="" 'selected'="" ;="" ?="">0</option> -->
+                                    <option value="1">Admin</option>
+                                    <option value="0">Guru</option>
                                 </select>
                             </div>
                             <div class="col-12">

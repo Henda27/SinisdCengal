@@ -36,8 +36,8 @@
                                     <option>----- Pilih Role -----</option>
                                     <!-- <option if="" ($is_admin="=" 1="" )="" echo="" 'selected'="" ;="" ?="">Admin</option>
                                     <option if="" ($is_admin="=" 0="" )="" echo="" 'selected'="" ;="" ?="">0</option> -->
-                                    <option value="1">admin</option>
-                                    <option value="0">guru</option>
+                                    <option value="1">Admin</option>
+                                    <option value="0">Guru</option>
                                 </select>
                             </div>
                             <div class="col-12">

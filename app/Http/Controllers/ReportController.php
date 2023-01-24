@@ -2,9 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use App\Models\NilaiUas;
+use App\Models\Guru;
+use App\Models\Siswa;
+use App\Models\Mapel;
 
-class GNilaiController extends Controller
+class ReportController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,7 +18,10 @@ class GNilaiController extends Controller
      */
     public function index()
     {
-        return view('guru.gnilai.index');
+        $id_guru = Auth::User()->id_guru;
+        $gsiswa = Siswa::get_by_id($id_guru);
+        $d = NilaiUas::with('guru')->with('siswa')->with('mapel')->get();
+        return view('guru.report.index', compact('d'));
     }
 
     /**
